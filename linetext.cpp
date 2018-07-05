@@ -1,14 +1,16 @@
 #include "linetext.h"
 
 LineText::LineText(QString text, QWidget *parent, int posx, int posy):
-    QLineEdit(text, parent)
+    QLineEdit("", parent)
 {
     this->setGeometry(posx, posy, EDIT_WIDTH, EDIT_HEIGHT);
 
     // Design
     this->setStyleSheet("QLineEdit{"
-                        "color: rgb(150, 150, 150);"
+                        "color: black;"
                         "border-radius: 3px;}");
+
+    this->setPlaceholderText(text);
 }
 
 void LineText::sendText()

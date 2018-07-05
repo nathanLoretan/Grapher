@@ -2,7 +2,7 @@
 
 Function::Function(double *refVmin, double *refVmax, int *refNbrPoint)
 {
-    functionString = "y=";
+    functionString = START;
     isShowable = true;
 
     ptrVmin = refVmin;
@@ -94,7 +94,7 @@ bool Function::calculFunction()
     }
     else
     {
-        setFunction("y=");
+        setFunction(START);
         return false;
     }
 
@@ -103,8 +103,8 @@ bool Function::calculFunction()
 
 bool Function::definePriority(QString &priority)
 {
-    int     priorityDegree = 0;
-    priority = functionString.section("y=", 1, 1);  // Throw away y =
+    int priorityDegree = 0;
+    priority = functionString.section(START, 1);  // Throw away y =
     priority.remove(QChar(' '), Qt::CaseInsensitive);
 
     for(int i = 0; i < priority.length(); i++)

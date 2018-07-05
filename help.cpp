@@ -10,7 +10,7 @@ Help::Help(QWidget *parent, QPalette pal) : QDialog(parent)
 
     helpText = new QLabel("Function f(\nx): (ex y=x+1) ", this);
     helpText->setGeometry( 10, 0, WIN_X, WIN_Y);
-    helpText->setFont(QFont( "Arial", 12, QFont::Normal));
+    helpText->setFont(QFont( "Arial", 8, QFont::Normal));
     helpText->setStyleSheet("QLabel { color : white;}");
     helpText->setVisible(true);
 
@@ -23,7 +23,7 @@ Help::Help(QWidget *parent, QPalette pal) : QDialog(parent)
         "4. Separator:\t\t\t {}, [], ()\n\n"
         "Command:\n"
         "1. setcolor(color):\t\t set the color of the selected graph\n"
-        "2. setminmax(min, max,):\t rescale axe X and calcul the value with"
+        "2. setminmax(min, max,):\t rescale axe X and calculate the value with"
                                                                 "these values.\n"
         "t\t\t\t The table is update.\n"
         "3. setnbrpoint(nbrPoint):\t set the resolution for drawing the"

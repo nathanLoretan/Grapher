@@ -8,17 +8,8 @@ MainWindows::MainWindows(QWidget *parent):
     this->setWindowTitle("Grapher");
     this->setFixedSize(this->size());
 
-    // // Background of the window
-    // QLinearGradient backGradient;
-    // backGradient.setStart(0, 0);
-    // backGradient.setFinalStop(0, 350);
-    // backGradient.setColorAt(0, BACKGROUND_0);
-    // backGradient.setColorAt(1, BACKGROUND_1);
-
     QPalette pal = this->palette();
     pal.setBrush(QPalette::Window, BACKGROUND);
-    // pal.setBrush(QPalette::Highlight, BACKGROUND);
-    // pal.setBrush(QPalette::Text, FONT_COLOR);
 
     this->setAutoFillBackground(true);
     this->setPalette(pal);
@@ -33,7 +24,7 @@ MainWindows::MainWindows(QWidget *parent):
     buttonHelp      = new Button("help",    this, BTN_HELP_POSX, BTN_HELP_POSY);
 
     // LineText
-    editFunc  = new LineText("y=", this, EDIT_FUNC_POSX, EDIT_FUNC_POSY);
+    editFunc  = new LineText("START", this, EDIT_FUNC_POSX, EDIT_FUNC_POSY);
     editCmd   = new LineText("command", this, EDIT_CMD_POSX, EDIT_CMD_POSY);
 
     // QLabel
@@ -41,16 +32,6 @@ MainWindows::MainWindows(QWidget *parent):
     nbrPoint->setGeometry(LBL_NBRP_POSX, LBL_NBRP_POSY, LBL_WIDTH, LBL_HEIGHT);
     nbrPoint->setFont(QFont(FONT_TYPE, FONT_SIZE, QFont::Normal));
     nbrPoint->setStyleSheet("QLabel { color : white;}");
-
-    // cmd = new QLabel("Command: ", this);
-    // cmd->setGeometry(LBL_CMD_POSX, LBL_CMD_POSY, LBL_WIDTH, LBL_HEIGHT);
-    // cmd->setFont(QFont(FONT_TYPE, FONT_SIZE, QFont::Normal));
-    // cmd->setStyleSheet("QLabel { color : white;}");
-    //
-    // func = new QLabel("Function f(x): (ex y=x+1) ", this);
-    // func->setGeometry(LBL_FUNC_POSX, LBL_FUNC_POSY, LBL_WIDTH, LBL_HEIGHT);
-    // func->setFont(QFont(FONT_TYPE, FONT_SIZE, QFont::Normal));
-    // func->setStyleSheet("QLabel { color : white;}");
 
     //List
     listFunc = new List(this, LIST_FUNC_POSX, LIST_FUNC_POSY);

@@ -19,20 +19,7 @@ Graphic::Graphic(QWidget *parent, int posx, int posy):
     this->yAxis->setSubTickPen(QPen(Qt::white, 1));
     this->xAxis->setTickLabelColor(Qt::white);
     this->yAxis->setTickLabelColor(Qt::white);
-
-    // QLinearGradient plotGradient;
-    // plotGradient.setStart(0, 0);
-    // plotGradient.setFinalStop(0, 350 * GRAPH_HEIGHT / WIN_Y);
-    // plotGradient.setColorAt(0, BACKGROUND_0);
-    // plotGradient.setColorAt(1, BACKGROUND_1);
+    
     this->setBackground(BACKGROUND);
-
-
-
-    // QLinearGradient axisRectGradient;
-    // axisRectGradient.setStart(0, 0);
-    // axisRectGradient.setFinalStop(0, 350);
-    // axisRectGradient.setColorAt(0, QColor(80, 80, 80));
-    // axisRectGradient.setColorAt(1, QColor(30, 30, 30));
     this->axisRect()->setBackground(BACKGROUND);
 }

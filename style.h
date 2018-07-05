@@ -71,4 +71,6 @@
 
 #define BACKGROUND  QColor(60, 60, 60)
 
+#define START   "y="
+
 #endif // STYLE_H

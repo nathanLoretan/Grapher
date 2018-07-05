@@ -61,11 +61,13 @@ void ManageFunc::changeNbrPoint(QString nbrPoint)
     if(nbrToStr)//&& value <= MAX_NBR_POINT)
     {
         data->setNbrPoint(value);
-        // Change step by step for not always recalcul the tables
-        if(data->getFuncIndex(0)->getFunction().compare("y=") > 0)
+
+        // // Change step by step for not always recalcul the tables
+        if(data->getFuncIndex(0)->getFunction().compare(START) > 0)
         {
             // Recalcul all table
-            for (std::list<Function*>::iterator it = data->funcList.begin(); it != data->funcList.end(); it++)
+            for (std::list<Function*>::iterator it = data->funcList.begin();
+                                        it != data->funcList.end(); it++)
                 (*it)->createTable();
 
             // Redraw all graph
@@ -90,11 +92,12 @@ void ManageFunc::rescaleAxes(QString min, QString max)
         data->setVmax(newVmin);
         data->setVmin(newVmax);
 
-        // Change step by step for not always recalcul the tables
-        if(data->getFuncIndex(0)->getFunction().compare("y=") > 0)
+        // // Change step by step for not always recalcul the tables
+        if(data->getFuncIndex(0)->getFunction().compare(START) > 0)
         {
             // Recalcul all table
-            for (std::list<Function*>::iterator it = data->funcList.begin(); it != data->funcList.end(); it++)
+            for (std::list<Function*>::iterator it = data->funcList.begin();
+                                        it != data->funcList.end(); it++)
                 (*it)->createTable();
 
             // Redraw all graph
@@ -113,8 +116,9 @@ void ManageFunc::changeFuncName(QString newName)
 {
     // Control if the function given is correct
     QString checkString = newName.toLower().remove(' ');
-    if(checkString.remove(' ').startsWith("y=") && checkString.remove(' ').compare("y=") > 0
-       && checkString.replace(*check, "?").remove('?') == "")
+    if(checkString.remove(' ').startsWith(START) &&
+       checkString.remove(' ').compare(START) > 0 &&
+       checkString.replace(*check, "?").remove('?') == "")
     {
         data->getFuncReference()->setFunction(newName);
         if(data->getFuncReference()->calculFunction())
@@ -140,7 +144,8 @@ void ManageFunc::newFunction()
     if(data->nbrFunction == 0)
     {
         // Create the first function
-        data->funcList.push_back(new Function(&(data->Vmin), &(data->Vmax),&(data->nbrPoint)));
+        data->funcList.push_back(new Function(&(data->Vmin),
+                                    &(data->Vmax),&(data->nbrPoint)));
 
         data->funcSelected = data->nbrFunction;
         data->nbrFunction++;
@@ -149,9 +154,10 @@ void ManageFunc::newFunction()
         data->view->notificationNew();
     }
     // Create new Function only if the last is define
-    else if(data->getFuncReference()->getFunction().remove(' ').compare("y=") > 0)
+    else if(data->getFuncReference()->getFunction().remove(' ').compare(START) > 0)
     {
-        data->funcList.push_back(new Function(&(data->Vmin), &(data->Vmax), &(data->nbrPoint)));
+        data->funcList.push_back(new Function(&(data->Vmin),
+                                    &(data->Vmax), &(data->nbrPoint)));
 
         data->funcSelected = data->nbrFunction;
         data->nbrFunction++;
@@ -188,9 +194,10 @@ void ManageFunc::selectFunc(int index)
 
 void ManageFunc::drawable()
 {
-    if(data->getFuncReference()->getFunction().remove(' ').compare("y=") > 0)
+    if(data->getFuncReference()->getFunction().remove(' ').compare(START) > 0)
     {
-        data->getFuncReference()->setShowable(!(data->getFuncReference()->getShowable()));
+        data->getFuncReference()->setShowable(
+                            !(data->getFuncReference()->getShowable()));
 
         // Notification
         data->view->notificationGraphe();
@@ -228,13 +235,14 @@ void ManageFunc::setMinMax(QCPRange range)
 
     // Change step by step for not always recalcul the tables
     if((VminZoom || VmaxZoom || VminZoom_out || VmaxZoom_out)
-        && data->getFuncIndex(0)->getFunction().compare("y=") > 0)       //if the first function isn't complete
+            && data->getFuncIndex(0)->getFunction().compare(START) > 0)
     {
         data->setVmax(range.upper);
         data->setVmin(range.lower);
 
         // Recalcul all table
-        for (std::list<Function*>::iterator it = data->funcList.begin(); it != data->funcList.end(); it++)
+        for (std::list<Function*>::iterator it = data->funcList.begin();
+                                        it != data->funcList.end(); it++)
             (*it)->createTable();
 
         // Redraw all graph
@@ -249,18 +257,34 @@ void ManageFunc::setMinMax(QCPRange range)
     cmd = cmd.toLower();
 
     // Check Good cmd wiht ()
-    if(cmd.count(QRegExp("(\\()")) == 1 && cmd.count(QRegExp("(\\))")) == 1)
+    if(cmd.count(QRegExp("(\\()")) == 1 && cmd.count(
+                                                QRegExp("(\\))")) == 1)
     {
         cmd = cmd.toLower();
         if(cmd.section(QRegExp("(\\())"), 0, 0).contains("setcolor"))
-            changeColor(cmd.section(QRegExp("(\\()"), 1, 1).remove(QRegExp("(\\))")));
 
-        else if(cmd.section(QRegExp("(\\())"), 0, 0).contains("setminmax") && cmd.count(QRegExp("(\\,)")) == 1)
-            rescaleAxes(cmd.section(QRegExp("(\\()"), 1, 1).remove(QRegExp("(\\))")).section(QRegExp("(,)"),0,0),
-                        cmd.section(QRegExp("(\\()"), 1, 1).remove(QRegExp("(\\))")).section(QRegExp("(,)"),1,1));
+            changeColor(cmd.section(
+                    QRegExp("(\\()"), 1, 1).remove(QRegExp("(\\))")));
 
-        else if(cmd.section(QRegExp("(\\())"), 0, 0).contains("setnbrpoint"))
-            changeNbrPoint(cmd.section(QRegExp("(\\()"), 1, 1).remove(QRegExp("(\\))")));
+        else if(cmd.section(
+                    QRegExp("(\\())"), 0, 0).contains("setminmax") &&
+                cmd.count(QRegExp("(\\,)")) == 1)
+
+            rescaleAxes(cmd.section(
+                            QRegExp("(\\()"), 1, 1).remove(
+                            QRegExp("(\\))")).section(
+                            QRegExp("(,)"),0,0),
+
+                        cmd.section(
+                            QRegExp("(\\()"), 1, 1).remove(
+                            QRegExp("(\\))")).section(
+                            QRegExp("(,)"),1,1));
+
+        else if(cmd.section(
+                        QRegExp("(\\())"), 0, 0).contains("setnbrpoint"))
+
+            changeNbrPoint(cmd.section(
+                    QRegExp("(\\()"), 1, 1).remove(QRegExp("(\\))")));
     }
 
     data->view->notificatiponClearCmd();
