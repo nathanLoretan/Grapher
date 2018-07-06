@@ -1,33 +1,42 @@
 #include "help.h"
 
-
-
 Help::Help(QWidget *parent, QPalette pal) : QDialog(parent)
 {
-    this->setGeometry(WIN_POSX, WIN_POSY, WIN_X, WIN_Y);
+    this->setGeometry(WIN_POSX, WIN_POSY, HELP_WIN_X, HELP_WIN_Y);
     this->setPalette(pal);
     this->setWindowTitle("Help");
+    // this->setVisible(true);
 
-    helpText = new QLabel("Function f(\nx): (ex y=x+1) ", this);
-    helpText->setGeometry( 10, 0, WIN_X, WIN_Y);
-    helpText->setFont(QFont( "Arial", 8, QFont::Normal));
-    helpText->setStyleSheet("QLabel { color : white;}");
+    helpText = new QLabel("", this);
+    helpText->setGeometry(MARGIN_X, MARGIN_Y, HELP_WIN_X, HELP_WIN_Y);
+    helpText->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    helpText->setFont(QFont("Arial", 10, QFont::Normal));
+    helpText->setWordWrap(true);
     helpText->setVisible(true);
 
+    helpText->setStyleSheet(
+        "QLabel {color:"HELP_FONT_COLOR"}");
+
     helpText->setText(QString(
-        "Operation:\n"
-        "1. Base:\t\t\t +, -, *, /, abs()\n"
-        "2. Power and exponential:\t ^, e, exp(), ln(), sqrt()\n"
-        "3. Trigonometric:\t\t sin(), cos(), tan(), arcsin(), arccos(),"
-                                                                    "arcctan()\n"
-        "4. Separator:\t\t\t {}, [], ()\n\n"
-        "Command:\n"
-        "1. setcolor(color):\t\t set the color of the selected graph\n"
-        "2. setminmax(min, max,):\t rescale axe X and calculate the value with"
-                                                                "these values.\n"
-        "t\t\t\t The table is update.\n"
-        "3. setnbrpoint(nbrPoint):\t set the resolution for drawing the"
-                                                                "graphes.\n"));
+        "<div>"
+        "    <h3><u><b>Operation</b>:</u></h3>"
+        "    <ul>"
+        "        <li>+, -, *, /, abs()</li>"
+        "        <li>^, e, exp(), ln(), sqrt()</li>"
+        "        <li>sin(), cos(), tan(), arcsin(), arccos(), arcctan()</li>"
+        "        <li>{}, [], ()</li>"
+        "    </ul>"
+        "</div>"
+        ""
+        "<div>"
+        "    <h3><u><b>Command:</b></u></h3>"
+        "    <ul>"
+        "        <li><i>setcolor(color)</i>: Set the color of the selected line</li>"
+        "        <li><i>setminmax(min, max)</i>: Rescale axe-x</li>"
+        "        <li><i>setnbrpoint(nbrPoint)</i>: Set the resolution</li>"
+        "    </ul>"
+        "</div>"
+    ));
 }
 
 Help::~Help()

@@ -7,8 +7,8 @@
 #define WIN_X           1400
 #define WIN_Y           900
 
-#define HELP_WIN_X      1000
-#define HELP_WIN_Y      700
+#define HELP_WIN_X      800
+#define HELP_WIN_Y      500
 
 #define MARGIN_X        50
 #define MARGIN_Y        50
@@ -68,6 +68,7 @@
 #define FONT_TYPE       "Arial"
 #define FONT_SIZE       8
 #define FONT_COLOR      QColor(150, 150, 150)
+#define HELP_FONT_COLOR "rgb(230, 230, 230)"
 
 #define BACKGROUND  QColor(60, 60, 60)
 

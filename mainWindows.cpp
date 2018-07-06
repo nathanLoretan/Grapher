@@ -24,7 +24,7 @@ MainWindows::MainWindows(QWidget *parent):
     buttonHelp      = new Button("help",    this, BTN_HELP_POSX, BTN_HELP_POSY);
 
     // LineText
-    editFunc  = new LineText("START", this, EDIT_FUNC_POSX, EDIT_FUNC_POSY);
+    editFunc  = new LineText(START, this, EDIT_FUNC_POSX, EDIT_FUNC_POSY);
     editCmd   = new LineText("command", this, EDIT_CMD_POSX, EDIT_CMD_POSY);
 
     // QLabel
